@@ -62,21 +62,21 @@ class ItemDetail extends Component {
       this.setState({PrimaryImage: newImage});
   }
 
-  disableAddToCart(){
+  showAddToCart(){
     const purchasingChannelCode = Number(this.props.item.CatalogEntryView[0].purchasingChannelCode);
     if(purchasingChannelCode === 0 || purchasingChannelCode === 1) {
-      return false;
-    } else {
       return true;
+    } else {
+      return false;
     }
   }
 
-  disablePickUpInStore() {
+  showPickUpInStore() {
     const purchasingChannelCode = Number(this.props.item.CatalogEntryView[0].purchasingChannelCode);
     if(purchasingChannelCode === 0 || purchasingChannelCode === 2) {
-      return false;
-    } else {
       return true;
+    } else {
+      return false;
     }
   }
 
@@ -158,19 +158,19 @@ class ItemDetail extends Component {
             </div>
           </div>
           <div className="row">
+          {this.showPickUpInStore() ?
             <div className="col-xs-6 c-padding-5">
-              <button className="c-width-100-p btn btn-lg hidden-sm hidden-xs c-black-bg" disabled={this.disablePickUpInStore()}><span className="c-white">PICK UP IN STORE</span></button>
-              <button className="c-width-100-p btn btn-md hidden-md hidden-lg c-black-bg" disabled={this.disablePickUpInStore()}><span className="c-white c-font-12">PICK UP IN STORE</span></button>
-            </div>
-            <div className="col-xs-6 c-padding-5">
-              <button className="c-width-100-p btn btn-lg hidden-sm hidden-xs c-red-bg" disabled={this.disableAddToCart()} id="addToCartButton"><span className="c-white">ADD TO CART</span></button>
-              <button className="c-width-100-p btn btn-md hidden-md hidden-lg c-red-bg" disabled={this.disableAddToCart()}><span className="c-white c-font-12">ADD TO CART</span></button>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-sm-6">
+              <button className="c-width-100-p btn btn-lg hidden-sm hidden-xs c-black-bg"><span className="c-white">PICK UP IN STORE</span></button>
+              <button className="c-width-100-p btn btn-md hidden-md hidden-lg c-black-bg"><span className="c-white c-font-12">PICK UP IN STORE</span></button>
               <h6 className="c-black text-center">find in a store</h6>
-            </div>
+            </div> : null
+          }
+          {this.showAddToCart() ?
+            <div className="col-xs-6 c-padding-5">
+              <button className="c-width-100-p btn btn-lg hidden-sm hidden-xs c-red-bg" id="addToCartButton"><span className="c-white">ADD TO CART</span></button>
+              <button className="c-width-100-p btn btn-md hidden-md hidden-lg c-red-bg"><span className="c-white c-font-12">ADD TO CART</span></button>
+            </div> : null
+          }
           </div>
           <div className="row">
             <div className="c-grey col-xs-4 col-sm-4 col-md-2 col-lg-2">
